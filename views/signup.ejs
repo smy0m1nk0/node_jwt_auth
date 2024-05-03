@@ -22,20 +22,19 @@
         e.preventDefault();
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email,password)
-        // const response = await fetch('/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({ email, password })
-        // });
-        // const data = await response.json();
-        // if (data.error) {
-        //     document.querySelector('.email.error').textContent = data.error;
-        // } else {
-        //     window.location.href = '/login';
-        // }
+        try {
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+        } catch (error) {
+            console.log(error);
+            
+        }
+     
     });
 </script>
 
