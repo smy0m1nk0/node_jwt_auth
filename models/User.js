@@ -42,14 +42,20 @@ userSchema.pre('save', async function(next){
 });
 
 // static method to login user
-// userSchema.statics.login = async function(email, password){
-//     const user = await this.findOne({email});
-//     if(user){
-//         console.log('user found');
-//         return user;
-//     }
-//     throw Error('incorrect email');
-// }
+userSchema.statics.login = async function(email, password){
+    const user = await this.findOne({email});
+    if(user){
+        // console.log('user found');
+        const auth =bcrypt.compare(password, user.password);
+        if(auth){
+            // console.log('password correct'); 
+        return user;
+        }
+        throw Error('incorrect password');
+
+    }
+    throw Error('incorrect email');
+}
 const User = mongoose.model('user', userSchema);
 
 module.exports = User;  
